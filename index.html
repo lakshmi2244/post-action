@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		body{
+			text-align: center;
+			margin: 20%;
+			background: url(https://www.teahub.io/photos/full/292-2927758_background-color-background-images-for-browser.jpg);
+			background-repeat: no-repeat;
+			background-size: 100%;
+			background-attachment: fixed;
+		}
+		.index{
+			padding: 5%;
+			border-width: 25px;
+			font-size: 18px;
+		}
+		#post{
+			border: 1px solid blue;
+			font-size: 20px;
+			padding: 0.8%;
+			border-radius: 25px;
+			text-align: center;
+		}
+		#mobile{
+			border: 1px solid blue;
+			font-size: 20px;
+			padding: 0.8%;
+			border-radius: 25px;
+			text-align: center;
+		}
+		.submit{
+			background-color: lightpink;
+			border: 1px solid blue;
+			width: 25%;
+			font-size: 20px;
+			padding: 1%;
+			border-radius: 25px;
+			color: steelblue;
+		}
+	</style>
+	<script type="text/javascript">
+		function submit(){
+		let post=document.getElementById("post").value
+		let mobile=document.getElementById("mobile").value
+		console.log(post)
+		console.log(mobile)
+		fetch("http://localhost:4022/newData",{
+			method:"POST",
+			headers:{
+				"Content-Type":"application/json"
+			},
+			body:JSON.stringify({name:post,age:mobile})
+		})
+		.then((res)=>{
+			console.log(res)
+			if(res.status===200)
+				alert("Data added")
+		})
+		.catch((err)=>{
+			alert(err)
+		})
+	}
+		</script>
+</head>
+<body>
+	<div class="index">
+	<p><input type="text" id="post" placeholder="enter a message"></p>
+	<p><input type="" placeholder="mobile number" id="mobile"></p>
+	<button onclick="submit()" class="submit">submit</button>
+	</div>
+</body>
+</html>

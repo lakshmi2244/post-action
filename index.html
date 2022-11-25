@@ -7,7 +7,6 @@
 	<style type="text/css">
 		body{
 			text-align: center;
-			margin: 20%;
 			background: url(https://www.teahub.io/photos/full/292-2927758_background-color-background-images-for-browser.jpg);
 			background-repeat: no-repeat;
 			background-size: 100%;
@@ -17,43 +16,84 @@
 			padding: 5%;
 			border-width: 25px;
 			font-size: 18px;
+			margin: 2%;
 		}
 		#post{
 			border: 1px solid blue;
 			font-size: 20px;
-			padding: 0.8%;
+			padding: 0.5%;
 			border-radius: 25px;
 			text-align: center;
 		}
 		#mobile{
 			border: 1px solid blue;
 			font-size: 20px;
-			padding: 0.8%;
+			padding: 0.5%;
 			border-radius: 25px;
 			text-align: center;
+		}
+		#course{
+			border: 1px solid blue;
+			width: 20%;
+			font-size: 18px;
+			padding: 0.5%;
+			border-radius: 25px;
+			text-align: center;
+		}
+		#email{
+			border: 1px solid blue;
+			width: 19%;
+			font-size: 18px;
+			padding: 0.5%;
+			border-radius: 25px;
+			text-align: center;
+		}
+		#password{
+			border: 1px solid blue;
+			width: 19%;
+			font-size: 18px;
+			padding: 0.5%;
+			border-radius: 25px;
+			text-align: center;
+		}
+		#checkbox{
+			color: white;
 		}
 		.submit{
 			background-color: lightpink;
 			border: 1px solid blue;
-			width: 25%;
+			width: 18%;
 			font-size: 20px;
-			padding: 1%;
+			padding: 0.8%;
 			border-radius: 25px;
 			color: steelblue;
+			margin-bottom: 2%;
 		}
 	</style>
 	<script type="text/javascript">
 		function submit(){
 		let post=document.getElementById("post").value
 		let mobile=document.getElementById("mobile").value
+		let course=document.getElementById("course").value
+		let email=document.getElementById("email").value
+		let password=document.getElementById("password").value
+		let gmale=document.getElementById("gmale").checked
+		let gfemale=document.getElementById("gfemale").checked
+		console.log(gmale,gfemale)
+		if(gmale==true) var gender="male"
+			else var gender="female"
 		console.log(post)
 		console.log(mobile)
+		console.log(course)
+		console.log(email)
+		console.log(password)
+		console.log(gender)
 		fetch("http://localhost:4022/newData",{
 			method:"POST",
 			headers:{
 				"Content-Type":"application/json"
 			},
-			body:JSON.stringify({name:post,age:mobile})
+			body:JSON.stringify({name:post,age:mobile,course:course,email:email,password:password,gender:gender})
 		})
 		.then((res)=>{
 			console.log(res)
@@ -68,9 +108,25 @@
 </head>
 <body>
 	<div class="index">
-	<p><input type="text" id="post" placeholder="enter a message"></p>
-	<p><input type="" placeholder="mobile number" id="mobile"></p>
-	<button onclick="submit()" class="submit">submit</button>
+	<h1 style="text-align: center;">Login page</h1>
+	<p><input type="text" id="post" placeholder="Enter a message"></p>
+	<p><input type="" placeholder="Mobile number" id="mobile"></p>
+	<p><input type="" placeholder=" Enter Email id" id="email"></p>
+	<p><input type="" placeholder="Enter password" id="password"></p>
+	<p id="gender">
+		<h3 id="checkbox">Gender</h3>
+			<input type="radio"  name="Gender" id="gmale" >Male
+			<input type="radio"  name="Gender" id="gfemale" >Female
+	</p>
+	<p>
+		<select id="course">
+			<option value="select a course">Select a course</option>
+			<option value="Mpcs">Mpcs</option>
+			<option value="Bipc">Bipc</option>
+			<option value="Mpc">Mpc</option>
+		</select>
+	</p><br/>
+	<button onclick="submit()" class="submit">Submit</button>
 	</div>
 </body>
 </html>
